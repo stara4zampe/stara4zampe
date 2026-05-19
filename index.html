@@ -1,0 +1,1063 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Star a 4 zampe® | Luxury Pet Boutique & Spa</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        /* --- DESIGN SYSTEM LUXURY --- */
+        :root {
+            --bg-dark: #121212;      
+            --accent: #FF6600;       
+            --text-light: #FFFFFF;   
+            --text-muted: #E0E0E0;   
+            --border-color: #262626; 
+        }
+
+        body { 
+            background-color: var(--bg-dark); 
+            color: var(--text-light); 
+            font-family: 'Montserrat', sans-serif; 
+            margin: 0; 
+            scroll-behavior: smooth;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* --- HEADER BIANCO EXCLUSIVE (BARRA A 202px) --- */
+        header { 
+            padding: 0 4%; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            background-color: #ffffff; 
+            border-bottom: 1px solid #eaeaea; 
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            height: 202px; 
+        }
+
+        /* Container del logo con posizionamento relativo per gestire l'effetto tridimensionale */
+        .logo-container {
+            cursor: pointer;
+            position: relative;
+            height: 100%;
+            display: flex;
+            align-items: center;
+        }
+
+        /* Logo a 240px che esce dalla barra in modo controllato */
+        .logo-container img {
+            height: 240px; 
+            width: auto;
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%); /* Centra perfettamente l'eccedenza sia sopra che sotto */
+            z-index: 1001;
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        nav a { 
+            color: #111111; 
+            text-decoration: none; 
+            margin-left: 24px; 
+            font-weight: 600; 
+            text-transform: uppercase;
+            font-size: 12px; 
+            letter-spacing: 1.5px; 
+            transition: all 0.3s;
+            cursor: pointer;
+            padding: 5px 0;
+        }
+
+        nav a:hover { 
+            color: var(--accent); 
+        }
+
+        /* Pulsante E-commerce Arancione */
+        nav a.nav-ecommerce {
+            color: var(--accent);
+            border: 2px solid var(--accent);
+            padding: 8px 16px;
+            border-radius: 0;
+        }
+
+        nav a.nav-ecommerce:hover {
+            background-color: var(--accent);
+            color: #ffffff;
+        }
+
+        /* --- STRUTTURA DELLE PAGINE (SPA VIRTUALIZZATA) --- */
+        .page {
+            display: none;
+        }
+        
+        .page.active {
+            display: block;
+        }
+
+        /* --- SEZIONE INTRODUTTIVA HERO --- */
+        .luxury-hero {
+            padding: 100px 6% 40px 6%;
+            text-align: center;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .luxury-hero .subtitle {
+            font-size: 14px; 
+            letter-spacing: 6px;
+            color: var(--accent);
+            text-transform: uppercase;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        .luxury-hero h1 {
+            font-family: 'Cinzel', serif;
+            font-size: 52px; 
+            font-weight: 500;
+            margin: 0;
+            letter-spacing: 5px;
+            color: #ffffff;
+        }
+
+        /* --- CONTENUTI EDITORIALI --- */
+        .content-section {
+            padding: 80px 6%;
+            background-color: var(--bg-dark);
+            display: flex;
+            justify-content: center;
+        }
+
+        .inner-container {
+            max-width: 900px; 
+            text-align: center;
+        }
+
+        .inner-container p {
+            font-size: 18px; 
+            line-height: 2.1; 
+            color: var(--text-muted);
+            font-weight: 400; 
+            margin-bottom: 35px;
+            text-align: justify;
+        }
+
+        .inner-container p strong {
+            color: #ffffff;
+            font-weight: 600;
+        }
+        
+        .inner-container h2 {
+            font-family: 'Cinzel', serif;
+            font-size: 36px;
+            color: #ffffff;
+            letter-spacing: 3px;
+            margin-bottom: 40px;
+            text-transform: uppercase;
+        }
+
+        /* --- TELEFONO IN EVIDENZA PAGINA PRENOTA --- */
+        .phone-display {
+            font-family: 'Cinzel', serif;
+            font-size: 42px;
+            color: #ffffff;
+            letter-spacing: 2px;
+            margin: 30px 0;
+            font-weight: 700;
+        }
+
+        /* --- PULSANTI DI CONTATTO SULLE PAGINE INTERNE --- */
+        .cta-container {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            margin-top: 50px;
+            flex-wrap: wrap;
+        }
+
+        .btn-call, .btn-message {
+            display: inline-block;
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            padding: 18px 40px;
+            border-radius: 0;
+            transition: all 0.3s ease;
+        }
+
+        .btn-call {
+            background-color: var(--accent);
+            color: #ffffff;
+            border: 1px solid var(--accent);
+        }
+
+        .btn-call:hover {
+            background-color: transparent;
+            color: var(--accent);
+        }
+
+        .btn-message {
+            background-color: transparent;
+            color: #ffffff;
+            border: 1px solid #ffffff;
+        }
+
+        .btn-message:hover {
+            background-color: #ffffff;
+            color: #121212;
+        }
+
+        /* --- SEZIONE: VALORI IN HOME --- */
+        .features-section {
+            padding: 40px 6% 100px 6%;
+            background-color: var(--bg-dark);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .feature-card {
+            text-align: center;
+            padding: 25px 15px;
+            border: 1px dashed var(--border-color);
+        }
+
+        .feature-card h4 {
+            font-family: 'Cinzel', serif;
+            color: var(--accent);
+            font-size: 14px;
+            letter-spacing: 2px;
+            margin: 0 0 15px 0;
+        }
+
+        .feature-card p {
+            font-size: 13px;
+            color: #b3b3b3;
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        /* --- VETRINA SELEZIONI --- */
+        .shop-section { 
+            padding: 100px 6%; 
+            background-color: #0b0b0b; 
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .section-title {
+            text-align: center;
+            font-family: 'Cinzel', serif;
+            font-size: 32px; 
+            letter-spacing: 4px;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+        }
+
+        .google-score-badge {
+            text-align: center;
+            font-size: 14px;
+            letter-spacing: 2px;
+            color: #FFCC00;
+            font-weight: 600;
+            margin-bottom: 60px;
+            text-transform: uppercase;
+        }
+
+        .grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); 
+            gap: 40px; 
+        }
+
+        .categoria { 
+            background-color: var(--bg-dark); 
+            border: 1px solid var(--border-color); 
+            padding: 60px 45px; 
+            text-align: center;
+            transition: all 0.4s ease;
+        }
+
+        .categoria:hover { 
+            border-color: #555; 
+            transform: translateY(-5px);
+        }
+
+        .categoria h3 { 
+            font-family: 'Cinzel', serif;
+            color: #ffffff; 
+            font-size: 22px; 
+            font-weight: 500;
+            margin-top: 0; 
+            letter-spacing: 3px;
+            margin-bottom: 25px;
+        }
+
+        .categoria p {
+            font-size: 16px; 
+            color: var(--text-muted);
+            font-weight: 400;
+            line-height: 1.8;
+            margin-bottom: 40px;
+            height: 80px; 
+        }
+        
+        .btn-luxury {
+            display: inline-block;
+            color: var(--text-light);
+            text-decoration: none;
+            font-size: 13px; 
+            font-weight: 600;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            padding: 8px 0;
+            border-bottom: 2px solid var(--accent); 
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .btn-luxury:hover {
+            color: var(--accent);
+            border-bottom-color: #ffffff;
+        }
+
+        /* --- REVIEWS SLIDER --- */
+        .reviews-section {
+            padding: 100px 6%;
+            background-color: var(--bg-dark);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .slider-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .slider-wrapper {
+            display: flex;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            scroll-behavior: smooth;
+            -webkit-overflow-scrolling: touch;
+            gap: 30px;
+            padding: 10px 5px;
+        }
+
+        .slider-wrapper::-webkit-scrollbar {
+            display: none;
+        }
+
+        .review-card {
+            flex: 0 0 calc(33.333% - 20px);
+            scroll-snap-align: start;
+            background-color: #1a1a1a;
+            padding: 40px;
+            border-left: 3px solid var(--accent);
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        @media (max-width: 992px) {
+            .review-card { flex: 0 0 calc(50% - 15px); }
+        }
+        @media (max-width: 768px) {
+            .review-card { flex: 0 0 100%; }
+        }
+
+        .google-stars {
+            color: #FFCC00;
+            font-size: 18px;
+            margin-bottom: 15px;
+            letter-spacing: 2px;
+        }
+
+        .review-text {
+            font-style: italic;
+            color: var(--text-muted);
+            font-size: 14px;
+            line-height: 1.8;
+            margin-bottom: 20px;
+            flex-grow: 1;
+        }
+
+        .review-author {
+            font-family: 'Cinzel', serif;
+            font-size: 12px;
+            letter-spacing: 2px;
+            color: #ffffff;
+            text-transform: uppercase;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-top: 1px solid #262626;
+            padding-top: 15px;
+        }
+
+        .google-badge {
+            font-size: 10px;
+            color: #4285F4;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+
+        .slider-nav {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 40px;
+        }
+
+        .nav-arrow {
+            background: transparent;
+            border: 1px solid var(--border-color);
+            color: #ffffff;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            user-select: none;
+        }
+
+        .nav-arrow:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+            background-color: #1a1a1a;
+        }
+
+        /* --- GRID PRODOTTI E-COMMERCE --- */
+        .ecommerce-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .product-card {
+            background-color: #1a1a1a;
+            border: 1px solid var(--border-color);
+            padding: 20px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .product-card:hover {
+            border-color: var(--accent);
+        }
+
+        .product-image-placeholder {
+            background-color: #262626;
+            height: 200px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            color: #666;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .product-card h3 {
+            font-family: 'Cinzel', serif;
+            font-size: 16px;
+            margin: 15px 0 10px 0;
+            letter-spacing: 1px;
+        }
+
+        .product-card .price {
+            color: var(--accent);
+            font-weight: 600;
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+
+        /* --- FOOTER COMPLETO --- */
+        footer { 
+            background-color: #0b0b0b;
+            padding: 80px 6% 40px 6%; 
+            border-top: 1px solid var(--border-color); 
+        }
+
+        .footer-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 40px;
+            max-width: 1200px;
+            margin: 0 auto 60px auto;
+            text-align: left;
+        }
+
+        .footer-column h5 {
+            font-family: 'Cinzel', serif;
+            color: #ffffff;
+            font-size: 15px;
+            letter-spacing: 2px;
+            margin: 0 0 25px 0;
+            text-transform: uppercase;
+        }
+
+        .footer-column p, .footer-column a {
+            color: #999999;
+            font-size: 14px;
+            line-height: 1.8;
+            margin: 0 0 12px 0;
+            text-decoration: none;
+            display: block;
+        }
+
+        .footer-column a:hover {
+            color: var(--accent);
+        }
+
+        .footer-column .highlight-contact {
+            color: #ffffff;
+            font-weight: 600;
+        }
+
+        .footer-bottom {
+            text-align: center; 
+            color: #555555; 
+            font-size: 11px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            border-top: 1px solid var(--border-color);
+            padding-top: 40px;
+        }
+
+        /* ========================================== */
+        /* REGOLAZIONI SPECIFICHE PER SMARTPHONE (RESPONSIVE) */
+        /* ========================================== */
+        @media (max-width: 768px) {
+            header {
+                height: auto;
+                flex-direction: column;
+                padding: 20px 4%;
+            }
+
+            .logo-container {
+                height: 120px;
+                margin-bottom: 15px;
+                width: 100%;
+                justify-content: center;
+            }
+
+            .logo-container img {
+                height: 120px;
+                position: relative;
+                top: 0;
+                transform: none;
+                left: 0;
+            }
+
+            nav {
+                justify-content: center;
+                gap: 10px;
+            }
+
+            nav a {
+                margin-left: 0;
+                margin: 0 8px;
+                font-size: 11px;
+                letter-spacing: 1px;
+            }
+
+            nav a.nav-ecommerce {
+                padding: 6px 12px;
+                margin-top: 5px;
+            }
+
+            .luxury-hero h1 {
+                font-size: 32px;
+                letter-spacing: 2px;
+            }
+
+            .inner-container h2 {
+                font-size: 24px;
+                letter-spacing: 1px;
+            }
+
+            .inner-container p {
+                font-size: 15px;
+                line-height: 1.8;
+                text-align: left; /* Più leggibile su schermi stretti rispetto al giustificato */
+            }
+
+            .phone-display {
+                font-size: 28px;
+            }
+
+            .btn-call, .btn-message {
+                padding: 14px 25px;
+                font-size: 11px;
+                width: 100%; /* I pulsanti diventano grandi a tutto schermo, facilissimi da cliccare con il pollice */
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="logo-container" onclick="showPage('home')">
+        <img src="logo.png.png" alt="Star a 4 zampe">
+    </div>
+    <nav>
+        <a onclick="showPage('home')">Chi Siamo</a>
+        <a onclick="showPage('toelettatura')">Toelettatura</a>
+        <a onclick="showPage('asilo')">Asilo per cani e gatti</a>
+        <a onclick="showPage('wedding')">Wedding dog sitter</a>
+        <a onclick="showPage('prenota')">Prenota</a>
+        <a onclick="showPage('ecommerce')" class="nav-ecommerce">E-commerce</a>
+    </nav>
+</header>
+
+<div id="homePage" class="page active">
+    <section class="luxury-hero">
+        <div class="subtitle">TOELETTATURA & PET STORE</div>
+        <h1>STAR A 4 ZAMPE®</h1>
+    </section>
+
+    <section class="about-section content-section">
+        <div class="inner-container">
+            <p>
+                Da <strong>Star a 4 zampe®</strong> offriamo un servizio di <strong>Toelettatura professionale ad alta specializzazione</strong>, 
+                utilizzando <strong>esclusivamente cosmetici naturali</strong> e tecniche mirate alla salute del manto e della cute.
+            </p>
+            <p>
+                La nostra filosofia si basa sulla trasparenza: nel nostro Store troverai <strong>solo alimenti naturali selezionati direttamente alla fonte</strong>. 
+                Sosteniamo la <strong>filiera corta</strong> per garantirti una tracciabilità totale e il massimo valore nutrizionale per la salute del tuo pet.
+            </p>
+            <p>
+                Affianchiamo alla nutrizione un reparto dedicato alla <strong>Parafarmacia veterinaria</strong>, dove selezioniamo con cura integratori e soluzioni specialistiche mirate alla prevenzione e alla cura quotidiana dei vostri animali.
+            </p>
+            <p>
+                Per i vostri giorni più importanti, offriamo l'esclusivo servizio di <strong>Wedding Dog Sitter</strong> personalizzato: una presenza di fiducia, elegante e professionale, che si prenderà cura del vostro compagno a quattro zampe durante tutta la cerimonia e il ricevimento, permettendogli di condividere la vostra gioia senza alcun elemento di stress.
+            </p>
+            <p>
+                Per offririrti un'experience di comfort assoluto, completiamo la nostra proposta con un exclusivissimo servizio di <strong>Asilo diurno, notturno e H24 rigorosamente "No-Cage"</strong> (senza gabbie). Inoltre, per agevolare ogni tua esigenza, mettiamo a dispositione il nostro servizio di accompagnamento personalizzato <strong>Taxi Dog</strong> dedicato a toelettatura e asilo, comode <strong>consegne a domicilio</strong> per gli acquisti del nostro Store e <strong>spedizioni esclusive in tutto il mondo</strong>.
+            </p>
+        </div>
+    </section>
+
+    <section class="features-section">
+        <div class="features-grid">
+            <div class="feature-card">
+                <h4>RIGOROSAMENTE NO-CAGE</h4>
+                <p>Spazi aperti e libertà totale per garantire un soggiorno sereno e senza stress.</p>
+            </div>
+            <div class="feature-card">
+                <h4>FILIERA CORTA</h4>
+                <p>Alimenti naturali selezionati all'origine per una tracciabilità e freschezza assolute.</p>
+            </div>
+            <div class="feature-card">
+                <h4>WEDDING DOG SITTER</h4>
+                <p>Un servizio di lusso per includere con eleganza il tuo pet nel tuo giorno più bello.</p>
+            </div>
+            <div class="feature-card">
+                <h4>TAXI DOG COMFORT</h4>
+                <p>Servizio di ritiro e riconsegna dedicato per asilo e trattamenti spa.</p>
+            </div>
+            <div class="feature-card">
+                <h4>COSMESI NATURALE</h4>
+                <p>Solo prodotti biologici e tecniche mirate alla salute dermatologica del pet.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="shop-section">
+        <div class="section-title">I NOSTRI SERVIZI ESCLUSIVI</div>
+        <div class="google-score-badge">★★★★★ ECCELLENZA CERTIFICATA SU GOOGLE</div>
+        <div class="grid">
+            <div class="categoria">
+                <h3>TOELETTATURA</h3>
+                <p>Trattamenti dermatologici avanzati, cosmetici bio 100% naturali e asciugatura relax per il benessere assoluto della cute.</p>
+                <a onclick="showPage('toelettatura')" class="btn-luxury">Scopri il servizio</a>
+            </div>
+            <div class="categoria">
+                <h3>ASILO PER CANI E GATTI</h3>
+                <p>Soggiorni diurni e H24 in totale libertà con il nostro protocollo rigorosamente No-Cage, in ambienti igienizzati e climatizzati.</p>
+                <a onclick="showPage('asilo')" class="btn-luxury">Scopri la struttura</a>
+            </div>
+            <div class="categoria">
+                <h3>WEDDING DOG SITTER</h3>
+                <p>L'eccellenza e l'eleganza di un servizio dedicato per rendere il tuo compagno a quattro zampe l'ospite d'onore del tuo matrimonio.</p>
+                <a onclick="showPage('wedding')" class="btn-luxury">Scopri i dettagli</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="reviews-section">
+        <div class="section-title">DICONO DI NOI</div>
+        <div class="google-score-badge">VALUTAZIONE COMPLESSIVA: 5.0 / 5.0 (★★★★★)</div>
+        
+        <div class="slider-container">
+            <div class="slider-wrapper" id="reviewsSlider">
+                <div class="review-card">
+                    <div class="google-stars">★★★★★</div>
+                    <p class="review-text">"Un livello di professionalità unico. La toelettatura è impeccabile e l'asilo no-cage ha ridisegnato il concetto di benessere per il mio maltese."</p>
+                    <div class="review-author"><span>Elena R. & Milo</span><span class="google-badge">Google Review</span></div>
+                </div>
+                <div class="review-card">
+                    <div class="google-stars">★★★★★</div>
+                    <p class="review-text">"Limpidi, trasparenti e amanti degli animali. Cibo da filiera corta eccezionale e il servizio Taxi Dog è di una comodità incredibile."</p>
+                    <div class="review-author"><span>Marco T. & Thor</span><span class="google-badge">Google Review</span></div>
+                </div>
+                <div class="review-card">
+                    <div class="google-stars">★★★★★</div>
+                    <p class="review-text">"I trattamenti dermatologici specifici hanno risolto i problemi di cute del mio bulldog. Prodotti naturali al top e staff straordinario."</p>
+                    <div class="review-author"><span>Sofia V. & Olivia</span><span class="google-badge">Google Review</span></div>
+                </div>
+                <div class="review-card">
+                    <div class="google-stars">★★★★★</div>
+                    <p class="review-text">"Hanno curato il servizio di Wedding Dog Sitter per il nostro matrimonio ed è stato perfetto. Il nostro Labrador era sereno, elegantissimo e coccolato ogni istante!"</p>
+                    <div class="review-author"><span>Alessia M. & Baloo</span><span class="google-badge">Google Review</span></div>
+                </div>
+                <div class="review-card">
+                    <div class="google-stars">★★★★★</div>
+                    <p class="review-text">"Struttura eccezionale. Ho lasciato il mio cane per un soggiorno H24 nell'asilo no-cage e sono rimasto super tranquillo grazie ai loro aggiornamenti continui."</p>
+                    <div class="review-author"><span>Davide L. & Rocky</span><span class="google-badge">Google Review</span></div>
+                </div>
+                <div class="review-card">
+                    <div class="google-stars">★★★★★</div>
+                    <p class="review-text">"La parafarmacia interna è fornitissima. Mi hanno saputo consigliare gli integratori biologici perfetti per il recupero del mio gatto. Competenza rara."</p>
+                    <div class="review-author"><span>Annalisa M. & Chicco</span><span class="google-badge">Google Review</span></div>
+                </div>
+                <div class="review-card">
+                    <div class="google-stars">★★★★★</div>
+                    <p class="review-text">"Il servizio di consegna a domicilio per i prodotti dello Store è puntualissimo. Qualità dei cibi da filiera corta insuperabile, si vede la differenza."</p>
+                    <div class="review-author"><span>Giuseppe N. & Luna</span><span class="google-badge">Google Review</span></div>
+                </div>
+                <div class="review-card">
+                    <div class="google-stars">★★★★★</div>
+                    <p class="review-text">"Grazie al loro servizio Wedding il nostro sogno si è avverato: avere la nostra barboncina alle nozze senza alcuna preoccupazione. Staff impeccabile!"</p>
+                    <div class="review-author"><span>Chiara F. & Zoe</span><span class="google-badge">Google Review</span></div>
+                </div>
+                <div class="review-card">
+                    <div class="google-stars">★★★★★</div>
+                    <p class="review-text">"Non ho mai visto un asilo no-cage così pulito e organizzato. Il mio cane non vorrebbe mai tornare a casa quando lo porto da loro. Cinque stelle strameritate!"</p>
+                    <div class="review-author"><span>Roberto P. & Cesare</span><span class="google-badge">Google Review</span></div>
+                </div>
+                <div class="review-card">
+                    <div class="google-stars">★★★★★</div>
+                    <p class="review-text">"La vera toelettatura di lusso. Usano solo prodotti bio che rispettano la cute sensibile del mio barbone grande mole. Risultato strabiliante ogni volta."</p>
+                    <div class="review-author"><span>Federica D. & Aron</span><span class="google-badge">Google Review</span></div>
+                </div>
+                <div class="review-card">
+                    <div class="google-stars">★★★★★</div>
+                    <p class="review-text">"Il servizio Taxi Dog ci ha salvato la vita più volte lavorando tutto il giorno. Affidabili, puntuali e di una dolcezza infinita con gli animali."</p>
+                    <div class="review-author"><span>Stefano B. & Joy</span><span class="google-badge">Google Review</span></div>
+                </div>
+                <div class="review-card">
+                    <div class="google-stars">★★★★★</div>
+                    <p class="review-text">"Boutique fantastica con marchi esclusivi ed alimenti di filiera corta introvabili altrove. Si percepisce lo studio e la passione dietro ogni scelta."</p>
+                    <div class="review-author"><span>Martina S. & Mia</span><span class="google-badge">Google Review</span></div>
+                </div>
+                <div class="review-card">
+                    <div class="google-stars">★★★★★</div>
+                    <p class="review-text">"Finalmente dei professionisti che capiscono le esigenze alimentari specifiche dei gatti. La consulenza per la dieta olistica è stata illuminante."</p>
+                    <div class="review-author"><span>Claudio F. & Romeo</span><span class="google-badge">Google Review</span></div>
+                </div>
+                <div class="review-card">
+                    <div class="google-stars">★★★★★</div>
+                    <p class="review-text">"Unici nel servizio wedding dog sitting a Conversano. Hanno gestito il nostro cane in chiesa e al locale con una classe e una professionalità da oscar."</p>
+                    <div class="review-author"><span>Valentina G. & Argo</span><span class="google-badge">Google Review</span></div>
+                </div>
+                <div class="review-card">
+                    <div class="google-stars">★★★★★</div>
+                    <p class="review-text">"Ambiente no-cage favoloso, i cani socializzano in totale libertà e sicurezza sotto lo sguardo attento di personale qualificato. Una garanzia assoluta."</p>
+                    <div class="review-author"><span>Andrea K. & Kira</span><span class="google-badge">Google Review</span></div>
+                </div>
+                <div class="review-card">
+                    <div class="google-stars">★★★★★</div>
+                    <p class="review-text">"I trattamenti dermatologici naturali hanno letteralmente rigenerato il pelo del mio pastore tedesco. Professionalità e igiene ai massimi livelli."</p>
+                    <div class="review-author"><span>Emanuele V. & Duke</span><span class="google-badge">Google Review</span></div>
+                </div>
+                <div class="review-card">
+                    <div class="google-stars">★★★★★</div>
+                    <p class="review-text">"Spedizioni velocissime ed imballaggio perfetto. Ordino i loro alimenti naturali direttamente dal Nord Italia perché la qualità della loro filiera è imbattibile."</p>
+                    <div class="review-author"><span>Laura M. & Frida</span><span class="google-badge">Google Review</span></div>
+                </div>
+                <div class="review-card">
+                    <div class="google-stars">★★★★★</div>
+                    <p class="review-text">"Gentilezza, amore e competenza smisurata. Il reparto parafarmacia è gestito magistralmente e sanno sempre consigliarti l'integratore o il parafarmaco giusto."</p>
+                    <div class="review-author"><span>Simona T. & Stitch</span><span class="google-badge">Google Review</span></div>
+                </div>
+                <div class="review-card">
+                    <div class="google-stars">★★★★★</div>
+                    <p class="review-text">"Hanno reso il giorno delle nostre nozze ancor più speciale gestendo il nostro Carlino con dedizione totale. Foto bellissime e cane felice e rilassato."</p>
+                    <div class="review-author"><span>Gianluca R. & Poldo</span><span class="google-badge">Google Review</span></div>
+                </div>
+                <div class="review-card">
+                    <div class="google-stars">★★★★★</div>
+                    <p class="review-text">"Il concetto no-cage per l'asilo notturno è fantastico. Niente ansia da separazione e il mattino dopo l'ho ritirato profumato e riposato. Consigliatissimi!"</p>
+                    <div class="review-author"><span>Paola C. & Maya</span><span class="google-badge">Google Review</span></div>
+                </div>
+                <div class="review-card">
+                    <div class="google-stars">★★★★★</div>
+                    <p class="review-text">"Store di lusso pazzesco, la selezione degli accessori e della guinzaglieria sartoriale è magnifica. Un punto di riferimento absolutissimo in tutta la Puglia."</p>
+                    <div class="review-author"><span>Fabio L. & King</span><span class="google-badge">Google Review</span></div>
+                </div>
+            </div>
+            <div class="slider-nav">
+                <div class="nav-arrow" onclick="scrollSlider(-1)">‹</div>
+                <div class="nav-arrow" onclick="scrollSlider(1)">›</div>
+            </div>
+        </div>
+    </section>
+</div>
+
+<div id="toelettaturaPage" class="page">
+    <section class="content-section">
+        <div class="inner-container">
+            <h2>HAUTE COUTURE & SPA | TOELETTATURA</h2>
+            <p>
+                Il servizio di toelettatura di <strong>Star a 4 zampe®</strong> ridefinisce lo standard dell'estetica e del benessere dermatologico per i vostri compagni più preziosi. La nostra filosofia esclude categoricamente l'utilizzo di sostanze chimiche aggressive: adoperiamo in via esclusiva <strong>prodotti dermoprotettivi 100% naturali, totalmente biodegradabili e formulati solo con estratti botanici di derivazione biologica certificata</strong>. Questo garantisce la totale assenza di pesticidi, parabeni o agenti tossici nocivi per la cute e per la salute sistemica dei pet.
+            </p>
+            <p>
+                La sicurezza e la salute sono le nostre priorità assolute: <strong>gli ambienti della nostra Spa vengono sanificati, disinfettati e igienizzati costantemente più volte al giorno, nello specifico dopo ogni singolo cliente, utilizzando presidi medico-chirurgici totalmente biologici, antibatterici e rigorosamente innocui per l'olfatto dei pet</strong>.
+            </p>
+            <p>
+                Ogni trattamento è studiato per essere un'esperienza sensoriale rilassante. <strong>La fase di asciugatura è rigorosamente antistress e viene eseguita con attrezzature particolari progettate appositamente per svolgere un piacevole massaggio alla cute</strong>, favorendo la microcircolazione sottocutanea, l'ossigenazione del bulbo pilifero e la rigenerazione naturale del pelo.
+            </p>
+            <p>
+                Siamo specializzati nell'esecuzione di protocolli curativi e tecnici complessi, tra cui:
+            </p>
+            <p style="padding-left: 20px; border-left: 2px solid var(--accent);">
+                • <strong>Bagni dermatologici e medicali:</strong> percorsi mirati per pet affetti da dermatiti, arrossamenti o ipersensibilità.<br>
+                • <strong>Bagni antiparassitari di prevenzione e cura:</strong> eseguiti in totale sicurezza.<br>
+                • <strong>Tagli a forbice personalizzati ed alta precisione:</strong> modellati secondo lo standard di razza o preferenze sartoriali.<br>
+                • <strong>Tosature igieniche e di mantenimento:</strong> eseguite nel totale rispetto della tessitura del manto.<br>
+                • <strong>Stripping e Trimming professionali:</strong> tecniche manuali indispensabili per i peli ruvidi, volte a preservarne colore e consistenza.<br>
+                • <strong>Cardature stagionali profonde:</strong> per la rimozione totale del sottopelo morto e la prevenzione dei nodi.<br>
+                • <strong>Igiene e pulizia dei denti avanzata:</strong> trattamenti mirati all'abbattimento del tartaro e alla freschezza del cavo orale senza stress.
+            </p>
+            <p>
+                Affidare il proprio pet alla nostra Spa significa scegliere un'eccellenza fatta di tecniche d'avanguardia, un'igiene degli ambienti ossessiva e, soprattutto, un amore incondizionato che mette al primo posto la serenità emotiva dell'animale.
+            </p>
+            
+            <div class="cta-container">
+                <a href="tel:+393515138224" class="btn-call">Chiama Ora</a>
+                <a href="https://wa.me/393515138224" target="_blank" class="btn-message">Invia un messaggio</a>
+            </div>
+        </div>
+    </section>
+</div>
+
+<div id="asiloPage" class="page">
+    <section class="content-section">
+        <div class="inner-container">
+            <h2>RESORT & ASILO RIGOROSAMENTE NO-CAGE</h2>
+            <p>
+                L'Asilo diurno e notturno H24 firmato <strong>Star a 4 zampe®</strong> nasce per sovvertire i vecchi concetti di custodia e pensione, offrendo un vero e proprio soggiorno a cinque stelle. La nostra struttura applica un protocollo <strong>rigorosamente No-Cage: nessuna gabbia, nessuna costrizione, ma una totale e vigilata libertà</strong> che rispetta l'etologia e la dignità di cani e gatti.
+            </p>
+            <p>
+                Gli interni sono dotati di un impianto di <strong>climatizzazione di ultima generazione controllato elettronicamente</strong>, strutturato per mantenere la temperatura perfetta sia in inverno che in estate. Per garantire l'incolumità e la salute dei nostri ospiti, gli <strong>ambienti vengono sanificati, disinfettati e igienizzati costantemente più volte al giorno</strong> con presidi medico-chirurgici totalmente biologici, antibatterici e innocui per l'olfatto dei pet.
+            </p>
+            <p>
+                I nostri punti di forza esclusivi includono:
+            </p>
+            <p style="padding-left: 20px; border-left: 2px solid var(--accent);">
+                • <strong>Spazi esterni pavimentati e immacolati:</strong> aree all'aria aperta progettate per il gioco e lo sgambamento, prive di terra per evitare la sporcizia e la proliferazione di parassiti. Durante l'attività all'aperto, i pet <strong>non vengono mai lasciati da soli</strong>, garantendo una supervisione attiva e costante.<br>
+                • <strong>Videosorveglianza H24 continua:</strong> telecamere ad alta definizione monitorano ogni angolo della struttura, assicurando un controllo costante e la massima trasparenza.<br>
+                • <strong>Socializzazione controllata:</strong> i gruppi di gioco vengono suddivisi con cura scientifica in base alla taglia, all'età e al temperamento caratteriale.<br>
+                • <strong>Aree relax separate per felini:</strong> spazi verticalizzati e silenziosi dedicati interamente alle esigenze e alla riservatezza dei gatti.
+            </p>
+            <p>
+                Che si tratti di poche ore o di un soggiorno prolungato, i vostri piccoli avranno a disposizione educatori professionisti pronti a colmarli di attenzioni, attività ludiche e riposo regale. Una serenità d'animo per voi, una vacanza indimenticabile per loro.
+            </p>
+            
+            <div class="cta-container">
+                <a href="tel:+393515138224" class="btn-call">Chiama Ora</a>
+                <a href="https://wa.me/393515138224" target="_blank" class="btn-message">Invia un messaggio</a>
+            </div>
+        </div>
+    </section>
+</div>
+
+<div id="weddingPage" class="page">
+    <section class="content-section">
+        <div class="inner-container">
+            <h2>WEDDING DOG SITTER DI LUSSO</h2>
+            <p>
+                Il giorno del vostro matrimonio è il coronamento di una storia d'amore, e un membro fondamentale della famiglia non può certamente restare a casa o essere fonte di stress per gli invitati. Il servizio di <strong>Wedding Dog Sitter esclusivo di Star a 4 zampe®</strong> vi permette di avere il vostro compagno di vita accanto a voi durante la cerimonia e il ricevimento, affidandolo a veri professionisti del settore del lusso pet.
+            </p>
+            <p>
+                <strong>"Il vostro giorno più bello coordinato con eleganza, amore e totale serenità: trasformiamo il vostro fedele compagno nell'ospite d'onore più coccolato e rilassato dell'evento."</strong>
+            </p>
+            <p>
+                Il nostro protocollo include uno studio preventivo del carattere del cane tramite incontri conoscitivi, la gestione attenta dei tempi del banchetto e della cerimonia per evitare picchi di stress da rumore o confusione, e l'affiancamento continuo durante i servizi fotografici. Ci assicureremo che il pet sia sempre idratato, spazzolato, nutrito ad orari precisi e felice di condividere la vostra gioia, garantendovi un matrimonio impeccabile e indimenticabile.
+            </p>
+            
+            <div class="cta-container">
+                <a href="tel:+393515138224" class="btn-call">Chiama Ora</a>
+                <a href="https://wa.me/393515138224" target="_blank" class="btn-message">Invia un messaggio</a>
+            </div>
+        </div>
+    </section>
+</div>
+
+<div id="prenotaPage" class="page">
+    <section class="content-section">
+        <div class="inner-container">
+            <h2>PRENOTA IL TUO APPUNTAMENTO ESCLUSIVO</h2>
+            <p style="text-align: center;">
+                Scegli la professionalità di Star a 4 zampe®. Siamo a tua completa disposizione: contattaci per riservare un servizio o semplicemente per richiedere informazioni dedicate su Toelettatura, disponibilità nell'Asilo No-Cage, qualsiasi tipo di prodotto del nostro Store o per pianificare il servizio Wedding.
+            </p>
+            
+            <div class="phone-display">+39 351 513 8224</div>
+            
+            <p style="text-align: center; color: var(--text-muted); font-size: 15px;">
+                Siamo pronti a soddisfare ogni tua richiesta. Scegli la modalità di contatto che preferisci:
+            </p>
+
+            <div class="cta-container">
+                <a href="tel:+393515138224" class="btn-call">Chiama Ora</a>
+                <a href="https://wa.me/393515138224" target="_blank" class="btn-message">Invia un messaggio</a>
+            </div>
+        </div>
+    </section>
+</div>
+
+<div id="ecommercePage" class="page">
+    <section class="content-section">
+        <div class="inner-container" style="max-width: 1200px;">
+            <h2>LUXURY BOUTIQUE ONLINE</h2>
+            <p style="text-align: center;">
+                Benvenuti nella selezione digitale di <strong>Star a 4 zampe®</strong>. Qui troverai solo alimenti naturali a filiera corta, 
+                integratori fitoterapici avanzati per la parafarmacia e accessori esclusivi di manifattura artigianale.
+            </p>
+
+            <div class="ecommerce-grid">
+                <div class="product-card">
+                    <div class="product-image-placeholder">Alimento Filiera Corta</div>
+                    <h3>Alimento Olistico Naturale Cani</h3>
+                    <div class="price">€ 24,90</div>
+                    <a href="https://wa.me/393515138224?text=Vorrei%20informazioni%20sull%20Alimento%20Olistico%20Naturale" target="_blank" class="btn-luxury" style="border-bottom-width: 1px; padding: 4px 10px;">Ordina via WhatsApp</a>
+                </div>
+                <div class="product-card">
+                    <div class="product-image-placeholder">Parafarmacia Bio</div>
+                    <h3>Integratore Dermatologico Cute e Pelo</h3>
+                    <div class="price">€ 18,50</div>
+                    <a href="https://wa.me/393515138224?text=Vorrei%20informazioni%20sull%20Integratore%20Dermatologico" target="_blank" class="btn-luxury" style="border-bottom-width: 1px; padding: 4px 10px;">Ordina via WhatsApp</a>
+                </div>
+                <div class="product-card">
+                    <div class="product-image-placeholder">Cosmesi Botanica</div>
+                    <h3>Shampoo Biologico Certificato</h3>
+                    <div class="price">€ 22,00</div>
+                    <a href="https://wa.me/393515138224?text=Vorrei%20informazioni%20sullo%20Shampoo%20Biologico" target="_blank" class="btn-luxury" style="border-bottom-width: 1px; padding: 4px 10px;">Ordina via WhatsApp</a>
+                </div>
+                <div class="product-card">
+                    <div class="product-image-placeholder">Accessori Haute Couture</div>
+                    <h3>Guinzaglieria Sartoriale di Lusso</h3>
+                    <div class="price">€ 45,00</div>
+                    <a href="https://wa.me/393515138224?text=Vorrei%20informazioni%20sulla%20Guinzaglieria%20Sartoriale" target="_blank" class="btn-luxury" style="border-bottom-width: 1px; padding: 4px 10px;">Ordina via WhatsApp</a>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+<footer>
+    <div class="footer-container">
+        <div class="footer-column">
+            <h5>DOVE TROVARCI</h5>
+            <p>Star a 4 zampe®</p>
+            <p>Via Pietro Nenni, 53/55<br>70014 Conversano (BA)<br>Puglia - Italia</p>
+        </div>
+        <div class="footer-column">
+            <h5>ORARI D'APERTURA</h5>
+            <p><strong>Store & Toelettatura:</strong><br>
+               Lun — Sab: 09:00 - 13:15<br>
+               Pomeriggio: 17:00 - 20:15<br>
+               <em>Giovedì pomeriggio chiuso</em><br>
+               <em>Domenica chiuso tutto il giorno</em>
+            </p>
+            <p><strong>Asilo:</strong><br>
+               <em>Orari specifici su richiesta.</em>
+            </p>
+        </div>
+        <div class="footer-column">
+            <h5>CONTATTI DIRETTI</h5>
+            <a href="tel:+393515138224" class="highlight-contact">Tel: +39 351 513 8224</a>
+            <a href="https://wa.me/393515138224" target="_blank" class="highlight-contact">WhatsApp Chat</a>
+            <a href="mailto:info@stara4zampe.it">Inviaci un'Email</a>
+        </div>
+        <div class="footer-column">
+            <h5>SEGUICI</h5>
+            <a href="https://www.instagram.com/stara4zampe/" target="_blank">Instagram</a>
+            <a href="https://www.facebook.com/stara4zampeconversano/" target="_blank">Facebook</a>
+        </div>
+    </div>
+
+    <div class="footer-bottom">
+        © 2026 STAR A 4 ZAMPE® | ALL RIGHTS RESERVED.
+    </div>
+</footer>
+
+<script>
+    function showPage(pageId) {
+        // Se l'utente clicca su e-commerce, mostra l'avviso e non cambia pagina
+        if (pageId === 'ecommerce') {
+            alert("La sezione E-commerce è momentaneamente in allestimento.");
+            return; 
+        }
+
+        // Nasconde tutte le pagine
+        document.querySelectorAll('.page').forEach(page => {
+            page.classList.remove('active');
+        });
+        
+        // Mostra la pagina selezionata
+        document.getElementById(pageId + 'Page').style.display = 'block';
+        document.getElementById(pageId + 'Page').classList.add('active');
+        
+        // Nasconde le altre a livello di display CSS pulito
+        document.querySelectorAll('.page').forEach(page => {
+            if(!page.classList.contains('active')) {
+                page.style.display = 'none';
+            }
+        });
+
+        // Riporta lo scroll in cima alla pagina all'istante
+        window.scrollTo({ top: 0, behavior: 'instant' });
+    }
+
+    // Script scorrimento Slider Recensioni in Home
+    function scrollSlider(direction) {
+        const slider = document.getElementById('reviewsSlider');
+        const cardWidth = slider.querySelector('.review-card').offsetWidth + 30; 
+        
+        slider.scrollBy({
+            left: direction * cardWidth,
+            behavior: 'smooth'
+        });
+    }
+</script>
+
+</body>
+</html>
