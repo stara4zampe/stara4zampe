@@ -2,6 +2,7 @@
 <html lang="it">
 <head>
     <meta charset="UTF-8">
+    <meta name="google-site-verification" content="OJ8aauBmu8q1rcFQ1E9LF2gnQv7_qvRrZXp7tHQRmdw" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Star a 4 zampe® | Toelettatura - Pet Store - Asilo - Wedding Dog Sitter</title>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
@@ -285,12 +286,17 @@
             gap: 40px; 
         }
 
+        /* Box modificato per allineare correttamente i pulsanti senza sovrapposizioni su smartphone */
         .categoria { 
             background-color: var(--bg-dark); 
             border: 1px solid var(--border-color); 
             padding: 60px 45px; 
             text-align: center;
             transition: all 0.4s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
         }
 
         .categoria:hover { 
@@ -308,13 +314,14 @@
             margin-bottom: 25px;
         }
 
+        /* Rimossa l'altezza fissa problematica per evitare sovrapposizioni e aggiunto spazio sotto */
         .categoria p {
             font-size: 16px; 
             color: var(--text-muted);
             font-weight: 400;
             line-height: 1.8;
             margin-bottom: 40px;
-            height: 80px; 
+            margin-top: 0;
         }
         
         .btn-luxury {
@@ -329,6 +336,7 @@
             border-bottom: 2px solid var(--accent); 
             transition: all 0.3s;
             cursor: pointer;
+            margin-top: auto; /* Spinge il pulsante sempre in fondo al riquadro */
         }
 
         .btn-luxury:hover {
@@ -607,6 +615,11 @@
                 text-align: left; /* Più leggibile su schermi stretti rispetto al giustificato */
             }
 
+            /* Ottimizzazione padding delle categorie su smartphone */
+            .categoria {
+                padding: 40px 25px;
+            }
+
             .phone-display {
                 font-size: 28px;
             }
@@ -659,7 +672,7 @@
                 Per i vostri giorni più importanti, offriamo l'esclusivo servizio di <strong>Wedding Dog Sitter</strong> personalizzato: una presenza di fiducia, elegante e professionale, che si prenderà cura del vostro compagno a quattro zampe durante tutta la cerimonia e il ricevimento, permettendogli di condividere la vostra gioia senza alcun elemento di stress.
             </p>
             <p>
-                Per offririrti un'experience di comfort assoluto, completiamo la nostra proposta con un exclusivissimo servizio di <strong>Asilo diurno, notturno e H24 rigorosamente "No-Cage"</strong> (senza gabbie). Inoltre, per agevolare ogni tua esigenza, mettiamo a dispositione il nostro servizio di accompagnamento personalizzato <strong>Taxi Dog</strong> dedicato a toelettatura e asilo, comode <strong>consegne a domicilio</strong> per gli acquisti del nostro Store e <strong>spedizioni esclusive in tutto il mondo</strong>.
+                Per offririrti un'esperienza di comfort assoluto, completiamo la nostra proposta con un exclusivissimo servizio di <strong>Asilo diurno, notturno e H24 rigorosamente "No-Cage"</strong> (senza gabbie). Inoltre, per agevolare ogni tua esigenza, mettiamo a disposizione il nostro servizio di accompagnamento personalizzato <strong>Taxi Dog</strong> dedicato a toelettatura e asilo, comode <strong>consegne a domicilio</strong> per gli acquisti del nostro Store e <strong>spedizioni esclusive in tutto il mondo</strong>.
             </p>
         </div>
     </section>
@@ -739,7 +752,7 @@
                 </div>
                 <div class="review-card">
                     <div class="google-stars">★★★★★</div>
-                    <p class="review-text">"Struttura eccezionale. Ho lasciato il mio cane per un soggiorno H24 nell'asilo no-cage e sono rimasto super tranquillo grazie ai loro aggiornamenti continui."</p>
+                    <p class="review-text">"Struttura eccezionale. Ho lasciato il mio cane per un soggiorno H24 nell'asilo no-cage e sono rimasto super tranquille grazie ai loro aggiornamenti continui."</p>
                     <div class="review-author"><span>Davide L. & Rocky</span><span class="google-badge">Google Review</span></div>
                 </div>
                 <div class="review-card">
